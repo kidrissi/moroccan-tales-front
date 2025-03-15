@@ -14,6 +14,19 @@
         <label for="password">Password:</label>
         <input type="password" v-model="password" id="password" required />
       </div>
+        <div>
+        <label for="password_confirm">Confirm Password:</label>
+        <input type="password" v-model="passwordConfirm" id="password_confirm" required />
+      </div>
+      <div>
+        <label for="bio">Bio:</label>
+        <textarea v-model="bio" id="bio" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="avatar">Avatar:</label>
+        <input type="file" @change="handleFileChange" id="avatar" />
+      </div>
       <button type="submit">Register</button>
     </form>
     <p v-if="error">{{ error }}</p>
@@ -33,7 +46,7 @@ const router = useRouter();
 
 const register = async () => {
   try {
-    const response = await axios.post("register/", {
+    const response = await axios.post("/accounts/register/", {
       username: username.value,
       email: email.value,
       password: password.value,

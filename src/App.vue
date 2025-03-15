@@ -17,28 +17,37 @@ onMounted(async () => {
 </script>
 
 <template>
+  <div class="app-container">
+    <h1 class="text-center text-primary mb-4">Stories</h1>
+
+    <div v-if="apiData.length" class="row">
+      <div v-for="story in apiData" :key="story.id" class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ story.title }}</h5>
+            <p class="card-text">{{ story.content }}</p>
+            <footer class="blockquote-footer text-muted">Author: {{ story.author }}</footer>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p v-else class="text-center text-danger">No stories available.</p>
+  </div>
   <div>
-    <h1>Stories</h1>
-    <ul v-if="apiData.length">
-      <li v-for="story in apiData" :key="story.id">
-        <h2>{{ story.title }}</h2>
-        <p>{{ story.content }}</p>
-      </li>
-    </ul>
-    <p v-else>No stories available.</p>
+    <router-view></router-view> <!-- This is where the routed components will be rendered -->
   </div>
 </template>
-
-<style>
+<style scoped>
 h1 {
   color: #42b983;
-  text-align: center;
-  font-family: Arial, sans-serif;
 }
-h2 {
+
+.card-title {
   color: #2c3e50;
 }
-p {
+
+.card-text {
   color: #34495e;
 }
 </style>
